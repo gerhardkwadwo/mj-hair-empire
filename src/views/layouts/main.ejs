@@ -37,6 +37,7 @@
   </main>
 
   <footer class="site-footer">
+    <% const currentYear = new Date().getFullYear(); %>
     <div class="container footer-grid">
       <div>
         <h3><%= brand.brandName %></h3>
@@ -58,6 +59,7 @@
       </div>
     </div>
     <div class="container footer-credit">
+      <p>© <%= currentYear %> <%= brand.brandName %>. All rights reserved.</p>
       <p>Designed & Developed by <a href="https://www.linkedin.com/in/gofosuin123/" target="_blank" rel="noopener noreferrer">Gerhard Ofosu</a></p>
     </div>
   </footer>

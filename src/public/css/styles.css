@@ -699,8 +699,11 @@ model-viewer {
 .site-footer {
   border-top: 1px solid #d8ccb4;
   margin-top: 2rem;
-  background: linear-gradient(180deg, #f3ecde 0%, #efe4cf 100%);
+  background: linear-gradient(180deg, #f3ecde 0%, #ede0c8 100%);
   color: #2b2418;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
 }
 
 .footer-grid {
@@ -716,13 +719,13 @@ model-viewer {
 
 .footer-grid p {
   margin: 0.28rem 0;
-  color: #2f271b;
+  color: #2a2318;
   font-size: 0.95rem;
   line-height: 1.55;
 }
 
 .footer-grid a {
-  color: #2f271b;
+  color: #2a2318;
   text-decoration: underline;
   text-decoration-color: rgba(168, 131, 49, 0.75);
   text-underline-offset: 2px;
@@ -734,15 +737,15 @@ model-viewer {
 
 .footer-credit {
   border-top: 1px solid rgba(168, 131, 49, 0.22);
-  padding: 0.8rem 0 1.1rem;
+  padding: 0.9rem 0 1.2rem;
   text-align: center;
 }
 
 .footer-credit p {
-  margin: 0;
-  font-size: 0.82rem;
+  margin: 0.18rem 0;
+  font-size: 0.88rem;
   line-height: 1.45;
-  color: #6b604b;
+  color: #584c36;
 }
 
 .footer-credit a {
@@ -904,20 +907,20 @@ model-viewer {
 
   .footer-grid {
     gap: 1.1rem;
-    padding: 1.35rem 0 1.7rem;
+    padding: 1.45rem 0 1.85rem;
   }
 
   .footer-grid p,
   .footer-grid a {
-    font-size: 0.9rem;
+    font-size: 0.94rem;
   }
 
   .footer-credit {
-    padding: 0.75rem 0 1rem;
+    padding: 0.85rem 0 1.15rem;
   }
 
   .footer-credit p {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
   }
 }
 
