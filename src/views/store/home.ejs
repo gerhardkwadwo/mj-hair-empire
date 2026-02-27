@@ -1,6 +1,7 @@
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
+      <% const generalWhatsappMessage = "Hi, welcome to MJ Hair Empire. How can we help you today?"; %>
       <p class="eyebrow">Premium Wig Boutique</p>
       <h1><%= brand.tagline %></h1>
       <p class="lede">
@@ -8,7 +9,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/shop">Shop Now</a>
-        <a class="btn btn-outline" target="_blank" rel="noreferrer" href="https://wa.me/<%= brand.whatsappNumber.replace(/[^\d]/g, '') %>">Order on WhatsApp</a>
+        <a class="btn btn-outline" target="_blank" rel="noreferrer" href="https://wa.me/<%= brand.whatsappNumber.replace(/[^\d]/g, '') %>?text=<%= encodeURIComponent(generalWhatsappMessage) %>">Order on WhatsApp</a>
       </div>
     </div>
     <div class="hero-visual">
