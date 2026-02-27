@@ -1,0 +1,50 @@
+<section class="section">
+  <div class="container narrow">
+    <div class="card confirmation-card">
+      <p class="eyebrow">Order Confirmed</p>
+      <h1>Thank you for your order</h1>
+      <p>Your Order ID is <strong><%= order.order_id %></strong>.</p>
+      <p>Status: <span class="badge"><%= order.status %></span></p>
+
+      <div class="summary-card">
+        <div class="summary-line">
+          <span>Name</span>
+          <strong><%= order.customer_name %></strong>
+        </div>
+        <div class="summary-line">
+          <span>Phone</span>
+          <strong><%= order.phone_number %></strong>
+        </div>
+        <div class="summary-line">
+          <span>Delivery Type</span>
+          <strong><%= order.delivery_type %></strong>
+        </div>
+        <% if (order.delivery_address) { %>
+          <div class="summary-line">
+            <span>Address</span>
+            <strong><%= order.delivery_address %></strong>
+          </div>
+        <% } %>
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <strong><%= formatCurrency(order.subtotal) %></strong>
+        </div>
+      </div>
+
+      <div class="order-items">
+        <% order.items.forEach((item) => { %>
+          <div class="summary-line">
+            <span><%= item.productName %> (<%= item.color %>, <%= item.length %>") x <%= item.quantity %></span>
+            <strong><%= formatCurrency(item.lineTotal) %></strong>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="stack-actions">
+        <a href="<%= orderWhatsappLink %>" target="_blank" rel="noreferrer" class="btn btn-primary">Send Order on WhatsApp</a>
+        <a href="/shop" class="btn btn-outline">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
+

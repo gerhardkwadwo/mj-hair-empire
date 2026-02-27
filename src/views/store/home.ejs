@@ -1,0 +1,151 @@
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Premium Wig Boutique</p>
+      <h1><%= brand.tagline %></h1>
+      <p class="lede">
+        Luxury wigs curated for confidence, comfort, and effortless styling. Crafted for everyday elegance in <%= brand.location %> and beyond.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/shop">Shop Now</a>
+        <a class="btn btn-outline" target="_blank" rel="noreferrer" href="https://wa.me/<%= brand.whatsappNumber.replace(/[^\d]/g, '') %>">Order on WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="/images/hero-wig-placeholder.svg" alt="Premium wig model placeholder image" loading="eager" />
+      <div class="hero-card">
+        <p>Delivery</p>
+        <strong><%= brand.deliveryInfo %></strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Featured Collection</p>
+        <h2>Best-Selling Units</h2>
+      </div>
+      <a href="/shop" class="text-link">View All</a>
+    </div>
+    <div class="product-grid">
+      <% featured.forEach((product) => { const img = product.media.find((m) => m.type === 'image'); %>
+        <article class="product-card">
+          <a href="/product/<%= product.slug %>">
+            <img src="<%= img ? img.path : '/images/product-placeholder-1.svg' %>" alt="<%= img?.alt || product.name %>" loading="lazy" />
+            <div class="product-card__body">
+              <p class="product-card__category"><%= product.category %></p>
+              <h3><%= product.name %></h3>
+              <div class="product-card__row">
+                <span><%= formatCurrency(product.price) %></span>
+                <span class="badge <%= product.availability.toLowerCase().replace(/\s+/g, '-') %>"><%= product.availability %></span>
+              </div>
+            </div>
+          </a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Shop by Type</p>
+        <h2>Categories</h2>
+      </div>
+    </div>
+    <div class="chip-grid">
+      <% categories.forEach((category) => { %>
+        <% const params = new URLSearchParams(); if (category === 'Frontal' || category === 'Closure') { params.set('laceType', category); } else { params.set('category', category); } %>
+        <a href="/shop?<%= params.toString() %>" class="chip">
+          <%= category %>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container info-cards">
+    <article class="info-card">
+      <h3>Fast Delivery</h3>
+      <p><%= brand.deliveryInfo %></p>
+    </article>
+    <article class="info-card">
+      <h3>Secure MoMo Checkout</h3>
+      <p>Pay with MoMo, upload proof, and send confirmation on WhatsApp.</p>
+    </article>
+    <article class="info-card">
+      <h3>Custom Support</h3>
+      <% 
+        const waRaw = String(brand.whatsappNumber || '');
+        const waDigits = waRaw.replace(/[^\d]/g, '');
+        const waNormalized = waDigits.startsWith('0') ? `233${waDigits.slice(1)}` : waDigits;
+        const waMessage = "Welcome to MJ Hair Empire. How can we assist you today?";
+        const waHref = `https://wa.me/${waNormalized}?text=${encodeURIComponent(waMessage)}`;
+      %>
+      <p>
+        Need help with length, lace type, or cap size? Reach our support team directly.
+      </p>
+      <a
+        class="inline-wa-cta"
+        href="<%= waHref %>"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open WhatsApp chat with <%= brand.brandName %> support"
+      >
+        <span class="inline-wa-cta__icon" aria-hidden="true">WA</span>
+        <span class="inline-wa-cta__text">WhatsApp Support</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Testimonials</p>
+        <h2>Client Love</h2>
+      </div>
+    </div>
+    <div class="testimonial-grid">
+      <blockquote class="testimonial">
+        “My wig came exactly as shown and the lace melted perfectly. The texture is premium.”
+        <cite>Ama, Accra</cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        “Fast delivery and great customer service. I placed my second order the same week.”
+        <cite>Efua, Tema</cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        “The bob unit is so classy and beginner-friendly. Highly recommend <%= brand.brandName %>.”
+        <cite>Joan, Kumasi</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Instagram Preview</p>
+        <h2>Styled Looks & New Drops</h2>
+      </div>
+      <a class="text-link" href="<%= brand.instagramUrl %>" target="_blank" rel="noreferrer">Follow on Instagram</a>
+    </div>
+    <div class="instagram-grid">
+      <% [1,2,3,4].forEach((i) => { %>
+        <a href="<%= brand.instagramUrl %>" target="_blank" rel="noreferrer" class="ig-card">
+          <img src="/images/product-placeholder-<%= i %>.svg" alt="Instagram preview placeholder <%= i %>" loading="lazy" />
+          <span>View Post</span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>

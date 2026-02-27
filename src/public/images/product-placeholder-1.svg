@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#2a2825"/><stop offset="100%" stop-color="#c8a24d"/></linearGradient></defs>
+  <rect width="700" height="700" fill="url(#g)"/><circle cx="540" cy="150" r="120" fill="rgba(255,255,255,0.1)"/>
+  <path d="M190 550c35-185 119-336 232-382 70-29 130 11 144 75 16 73-29 126-92 180-78 66-108 116-120 197H190z" fill="rgba(255,255,255,0.14)"/>
+  <text x="45" y="640" fill="#fff" font-size="34" font-family="Georgia, serif">MJ Premium Wig</text>
+</svg>
+

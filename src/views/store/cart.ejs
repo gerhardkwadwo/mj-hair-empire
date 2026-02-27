@@ -1,0 +1,56 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Cart</p>
+        <h1>Your Selection</h1>
+      </div>
+    </div>
+
+    <% if (!items.length) { %>
+      <div class="empty-state card">
+        <h3>Your cart is empty</h3>
+        <p>Browse our premium units and add your preferred length and color.</p>
+        <a href="/shop" class="btn btn-primary">Continue Shopping</a>
+      </div>
+    <% } else { %>
+      <div class="cart-layout">
+        <div class="card">
+          <% items.forEach((item, index) => { const img = item.product.media.find((m) => m.type === 'image'); %>
+            <div class="cart-item">
+              <img src="<%= img ? img.path : '/images/product-placeholder-1.svg' %>" alt="<%= item.product.name %>" loading="lazy" />
+              <div>
+                <h3><a href="/product/<%= item.product.slug %>"><%= item.product.name %></a></h3>
+                <p class="muted">SKU: <%= item.product.sku %></p>
+                <p>Color: <strong><%= item.color %></strong> • Length: <strong><%= item.length %>"</strong></p>
+                <p><%= formatCurrency(item.product.price) %> each</p>
+              </div>
+              <form method="post" action="/cart/update" class="qty-form">
+                <input type="hidden" name="key" value="<%= index %>" />
+                <label class="sr-only" for="qty-<%= index %>">Quantity</label>
+                <input id="qty-<%= index %>" type="number" name="quantity" min="0" value="<%= item.quantity %>" />
+                <button type="submit" class="btn btn-ghost">Update</button>
+              </form>
+              <form method="post" action="/cart/remove">
+                <input type="hidden" name="key" value="<%= index %>" />
+                <button type="submit" class="btn btn-ghost danger">Remove</button>
+              </form>
+            </div>
+          <% }) %>
+        </div>
+
+        <aside class="card summary-card">
+          <h2>Order Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong><%= formatCurrency(subtotal) %></strong>
+          </div>
+          <p class="muted">Delivery fees are confirmed after order review.</p>
+          <a href="/checkout" class="btn btn-primary full">Proceed to Checkout</a>
+          <a href="/shop" class="btn btn-outline full">Continue Shopping</a>
+        </aside>
+      </div>
+    <% } %>
+  </div>
+</section>
+

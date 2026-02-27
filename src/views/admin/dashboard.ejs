@@ -1,0 +1,104 @@
+<section class="admin-topbar">
+  <div>
+    <p class="eyebrow">Admin Dashboard</p>
+    <h1><%= brand.brandName %></h1>
+  </div>
+  <div class="stack-actions">
+    <a href="/" class="btn btn-ghost">View Store</a>
+    <a href="/admin/products/new" class="btn btn-primary">Add Product</a>
+    <form method="post" action="/admin/logout">
+      <button type="submit" class="btn btn-outline">Logout</button>
+    </form>
+  </div>
+</section>
+
+<section class="admin-grid">
+  <div class="card">
+    <div class="section-head">
+      <h2>Products</h2>
+      <p class="muted"><%= products.length %> total</p>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach((product) => { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td><%= product.sku %></td>
+              <td><%= formatCurrency(product.price) %></td>
+              <td><%= product.stock_qty %></td>
+              <td><span class="badge <%= product.availability.toLowerCase().replace(/\s+/g, '-') %>"><%= product.availability %></span></td>
+              <td class="table-actions">
+                <a class="btn btn-ghost" href="/admin/products/<%= product.id %>/edit">Edit</a>
+                <form method="post" action="/admin/products/<%= product.id %>/delete">
+                  <button type="submit" class="btn btn-ghost danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-head">
+      <h2>Orders</h2>
+      <p class="muted"><%= orders.length %> total</p>
+    </div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Subtotal</th>
+            <th>Proof</th>
+            <th>Status</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orders.forEach((order) => { %>
+            <tr>
+              <td><%= order.order_id %></td>
+              <td>
+                <div><%= order.customer_name %></div>
+                <div class="muted"><%= order.phone_number %></div>
+              </td>
+              <td><%= formatCurrency(order.subtotal) %></td>
+              <td>
+                <% if (order.payment_proof_path) { %>
+                  <a class="text-link" href="<%= order.payment_proof_path %>" target="_blank" rel="noopener noreferrer">View Proof</a>
+                <% } else { %>
+                  <span class="muted">No proof</span>
+                <% } %>
+              </td>
+              <td><span class="badge"><%= order.status %></span></td>
+              <td>
+                <form method="post" action="/admin/orders/<%= order.id %>/status" class="status-form">
+                  <select name="status">
+                    <% ['New','Confirmed','Processing','Ready','Delivered','Cancelled'].forEach((status) => { %>
+                      <option value="<%= status %>" <%= order.status === status ? 'selected' : '' %>><%= status %></option>
+                    <% }) %>
+                  </select>
+                  <button type="submit" class="btn btn-ghost">Save</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

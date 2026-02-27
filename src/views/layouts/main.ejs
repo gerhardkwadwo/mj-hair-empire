@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || brand.brandName %></title>
+  <meta name="description" content="<%= metaDescription || brand.tagline %>" />
+  <meta name="theme-color" content="<%= brand.primaryColor %>" />
+  <meta property="og:title" content="<%= title || brand.brandName %>" />
+  <meta property="og:description" content="<%= metaDescription || brand.tagline %>" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand-mark" aria-label="<%= brand.brandName %> home">
+        <span class="brand-mark__name"><%= brand.brandName %></span>
+        <span class="brand-mark__tag"><%= brand.tagline %></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="/" class="<%= currentPath === '/' ? 'is-active' : '' %>">Home</a>
+        <a href="/shop" class="<%= currentPath.startsWith('/shop') ? 'is-active' : '' %>">Shop</a>
+        <a href="/cart" class="<%= currentPath.startsWith('/cart') ? 'is-active' : '' %>">Cart <span class="pill"><%= cartCount || 0 %></span></a>
+        <% if (isAdminAuthenticated) { %>
+          <a href="/admin">Admin</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3><%= brand.brandName %></h3>
+        <p><%= brand.tagline %></p>
+        <p><%= brand.location %></p>
+        <p><%= brand.deliveryInfo %></p>
+      </div>
+      <div>
+        <h4>Order & Support</h4>
+        <p>MoMo: <%= brand.momoNumber %></p>
+        <p>Account: <%= brand.momoAccountName %></p>
+        <p>WhatsApp: <%= brand.whatsappNumber %></p>
+        <p>Email: <a href="mailto:<%= brand.email %>"><%= brand.email %></a></p>
+      </div>
+      <div>
+        <h4>Socials</h4>
+        <p><a href="<%= brand.instagramUrl %>" target="_blank" rel="noreferrer">Instagram</a></p>
+        <p><a href="<%= brand.tiktokUrl %>" target="_blank" rel="noreferrer">TikTok</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

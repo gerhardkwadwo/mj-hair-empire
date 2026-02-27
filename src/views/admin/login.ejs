@@ -1,0 +1,17 @@
+<section class="admin-login card">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1><%= brand.brandName %> Dashboard</h1>
+    <p class="muted">Password-protected access for product and order management.</p>
+  </div>
+  <% if (error) { %>
+    <p class="alert"><%= error %></p>
+  <% } %>
+  <form method="post" action="/admin/login" class="form-grid">
+    <label>Password
+      <input type="password" name="password" required />
+    </label>
+    <button type="submit" class="btn btn-primary full">Sign In</button>
+  </form>
+</section>
+

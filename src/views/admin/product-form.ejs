@@ -1,0 +1,105 @@
+<section class="admin-topbar">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1><%= product ? 'Edit Product' : 'Add Product' %></h1>
+  </div>
+  <div class="stack-actions">
+    <a href="/admin" class="btn btn-ghost">Back to Dashboard</a>
+  </div>
+</section>
+
+<section class="card">
+  <% if (error) { %>
+    <p class="alert"><%= error %></p>
+  <% } %>
+  <form method="post" enctype="multipart/form-data" action="<%= product ? `/admin/products/${product.id}` : '/admin/products' %>" class="form-grid two-col">
+    <label>Name
+      <input type="text" name="name" required value="<%= product?.name || '' %>" />
+    </label>
+    <label>SKU
+      <input type="text" name="sku" required value="<%= product?.sku || '' %>" />
+    </label>
+    <label>Slug (optional)
+      <input type="text" name="slug" value="<%= product?.slug || '' %>" />
+    </label>
+    <label>Category
+      <select name="category">
+        <% ['Straight','Body Wave','Curly','Bob','Frontal','Closure'].forEach((cat) => { %>
+          <option value="<%= cat %>" <%= (product?.category || 'Straight') === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Price (GHS)
+      <input type="number" min="0" step="0.01" name="price" value="<%= product?.price || 0 %>" />
+    </label>
+    <label>Availability
+      <select name="availability">
+        <% ['In Stock','Low Stock','Sold Out'].forEach((status) => { %>
+          <option value="<%= status %>" <%= (product?.availability || 'In Stock') === status ? 'selected' : '' %>><%= status %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Stock Quantity
+      <input type="number" min="0" step="1" name="stock_qty" value="<%= product?.stock_qty || 0 %>" />
+    </label>
+    <label>Low Stock Threshold
+      <input type="number" min="0" step="1" name="low_stock_threshold" value="<%= product?.low_stock_threshold || 2 %>" />
+    </label>
+    <label>Lace Type
+      <select name="lace_type">
+        <% ['Frontal','Closure'].forEach((lace) => { %>
+          <option value="<%= lace %>" <%= (product?.lace_type || 'Closure') === lace ? 'selected' : '' %>><%= lace %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Density
+      <input type="text" name="density" value="<%= product?.density || '180%' %>" />
+    </label>
+    <label>Cap Size
+      <select name="cap_size">
+        <% ['Small','Medium','Large'].forEach((size) => { %>
+          <option value="<%= size %>" <%= (product?.cap_size || 'Medium') === size ? 'selected' : '' %>><%= size %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Colors (comma-separated)
+      <input type="text" name="colors" value="<%= (product?.colors || []).join(', ') %>" />
+    </label>
+    <label>Lengths (comma-separated inches)
+      <input type="text" name="lengths" value="<%= (product?.lengths || []).join(', ') %>" />
+    </label>
+    <label class="full-span">Description
+      <textarea name="description" rows="4"><%= product?.description || '' %></textarea>
+    </label>
+
+    <% if (product) { %>
+      <label class="checkbox-row full-span">
+        <input type="checkbox" name="keepExistingMedia" checked />
+        Keep existing media and append new uploads
+      </label>
+      <% if (product.media?.length) { %>
+        <div class="media-preview full-span">
+          <% product.media.forEach((m) => { %>
+            <div class="media-chip">
+              <span><%= m.type.toUpperCase() %></span>
+              <small><%= m.path %></small>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    <% } %>
+
+    <label class="full-span">Multiple Images
+      <input type="file" name="images" accept="image/*" multiple />
+    </label>
+    <label>Short Video (optional)
+      <input type="file" name="video" accept="video/*" />
+    </label>
+    <label>3D Model (.glb/.gltf optional)
+      <input type="file" name="model" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" />
+    </label>
+
+    <button type="submit" class="btn btn-primary full-span"><%= product ? 'Update Product' : 'Create Product' %></button>
+  </form>
+</section>
+

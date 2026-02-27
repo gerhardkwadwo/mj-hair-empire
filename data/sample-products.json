@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Royal Straight 13x4 Frontal Wig",
+    "slug": "royal-straight-13x4-frontal-wig",
+    "sku": "MJ-STR-001",
+    "description": "Silky premium straight unit with natural hairline and salon-finish shine.",
+    "category": "Straight",
+    "price": 850,
+    "availability": "In Stock",
+    "stock_qty": 8,
+    "low_stock_threshold": 2,
+    "lace_type": "Frontal",
+    "density": "180%",
+    "cap_size": "Medium",
+    "colors": ["Natural Black", "Dark Brown"],
+    "lengths": ["18", "22", "26"],
+    "media": [
+      { "type": "image", "path": "/images/product-placeholder-1.svg", "alt": "Royal Straight frontal wig" },
+      { "type": "image", "path": "/images/product-placeholder-2.svg", "alt": "Royal Straight side view" }
+    ]
+  },
+  {
+    "name": "Soft Body Wave Closure Wig",
+    "slug": "soft-body-wave-closure-wig",
+    "sku": "MJ-BDW-002",
+    "description": "Lightweight body wave closure wig designed for soft movement and everyday luxury.",
+    "category": "Body Wave",
+    "price": 780,
+    "availability": "Low Stock",
+    "stock_qty": 2,
+    "low_stock_threshold": 2,
+    "lace_type": "Closure",
+    "density": "200%",
+    "cap_size": "Medium",
+    "colors": ["Natural Black", "Burgundy"],
+    "lengths": ["16", "20", "24"],
+    "media": [
+      { "type": "image", "path": "/images/product-placeholder-3.svg", "alt": "Body wave closure wig" }
+    ]
+  },
+  {
+    "name": "Signature Curly HD Lace Wig",
+    "slug": "signature-curly-hd-lace-wig",
+    "sku": "MJ-CUR-003",
+    "description": "Defined curls with premium lace melt and full volume for standout styling.",
+    "category": "Curly",
+    "price": 990,
+    "availability": "In Stock",
+    "stock_qty": 5,
+    "low_stock_threshold": 2,
+    "lace_type": "Frontal",
+    "density": "220%",
+    "cap_size": "Large",
+    "colors": ["Natural Black"],
+    "lengths": ["14", "18", "22"],
+    "media": [
+      { "type": "image", "path": "/images/product-placeholder-4.svg", "alt": "Curly HD lace wig" }
+    ]
+  },
+  {
+    "name": "Classic Blunt Bob Wig",
+    "slug": "classic-blunt-bob-wig",
+    "sku": "MJ-BOB-004",
+    "description": "Chic blunt-cut bob with polished finish and easy daily styling.",
+    "category": "Bob",
+    "price": 620,
+    "availability": "Sold Out",
+    "stock_qty": 0,
+    "low_stock_threshold": 1,
+    "lace_type": "Closure",
+    "density": "180%",
+    "cap_size": "Small",
+    "colors": ["Natural Black", "Jet Black"],
+    "lengths": ["10", "12", "14"],
+    "media": [
+      { "type": "image", "path": "/images/product-placeholder-5.svg", "alt": "Classic bob wig" }
+    ]
+  }
+]
+

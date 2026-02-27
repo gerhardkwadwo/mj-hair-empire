@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="container checkout-layout">
+    <div class="card">
+      <p class="eyebrow">Checkout</p>
+      <h1>Place Your Order</h1>
+      <% if (typeof error !== 'undefined' && error) { %>
+        <p class="alert"><%= error %></p>
+      <% } %>
+
+      <form method="post" action="/checkout" enctype="multipart/form-data" class="form-grid" data-checkout-form>
+        <label>Full Name
+          <input type="text" name="fullName" required value="<%= formData?.fullName || '' %>" />
+        </label>
+        <label>Phone Number
+          <input type="tel" name="phoneNumber" required value="<%= formData?.phoneNumber || '' %>" />
+        </label>
+
+        <label>Delivery Type
+          <select name="deliveryType" data-delivery-type>
+            <% ['Pickup','Delivery'].forEach((type) => { %>
+              <option value="<%= type %>" <%= (formData?.deliveryType || 'Pickup') === type ? 'selected' : '' %>><%= type %></option>
+            <% }) %>
+          </select>
+        </label>
+
+        <label class="<%= (formData?.deliveryType || 'Pickup') === 'Delivery' ? '' : 'is-hidden' %>" data-delivery-address-wrap>
+          Delivery Address
+          <textarea name="deliveryAddress" rows="3"><%= formData?.deliveryAddress || '' %></textarea>
+        </label>
+
+        <label>Notes
+          <textarea name="notes" rows="3" placeholder="Any custom requests or preferred delivery time"><%= formData?.notes || '' %></textarea>
+        </label>
+
+        <div class="payment-box">
+          <h2>MoMo Payment</h2>
+          <p><strong>MoMo Number:</strong> <%= brand.momoNumber %></p>
+          <p><strong>Account Name:</strong> <%= brand.momoAccountName %></p>
+          <p class="muted">Make payment via MoMo and upload payment proof below.</p>
+          <label>Payment Screenshot (optional)
+            <input type="file" name="paymentProof" accept="image/*,.pdf" />
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary full">Place Order</button>
+      </form>
+    </div>
+
+    <aside class="card summary-card">
+      <h2>Order Summary</h2>
+      <% items.forEach((item) => { %>
+        <div class="summary-line">
+          <div>
+            <p><%= item.product.name %></p>
+            <p class="muted"><%= item.color %> • <%= item.length %>" • Qty <%= item.quantity %></p>
+          </div>
+          <strong><%= formatCurrency(item.lineTotal) %></strong>
+        </div>
+      <% }) %>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong><%= formatCurrency(subtotal) %></strong>
+      </div>
+      <p class="muted">Delivery fee may be added based on your location.</p>
+    </aside>
+  </div>
+</section>
+

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="700" viewBox="0 0 700 700">
+  <defs><linearGradient id="g" x1="1" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#1f1f1f"/><stop offset="100%" stop-color="#b59658"/></linearGradient></defs>
+  <rect width="700" height="700" fill="url(#g)"/>
+  <path d="M205 520c25-120 90-225 181-274 71-38 138-5 142 62 6 81-70 120-142 170-37 26-72 57-105 103l-76-61z" fill="rgba(255,255,255,0.15)"/>
+  <rect x="120" y="110" width="460" height="460" rx="24" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="14"/>
+  <text x="45" y="640" fill="#fff" font-size="30" font-family="Georgia, serif">Classic Bob</text>
+</svg>
+

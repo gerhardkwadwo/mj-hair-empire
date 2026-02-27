@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Product {
+  id                Int      @id @default(autoincrement())
+  name              String
+  slug              String   @unique
+  sku               String   @unique
+  description       String   @default("")
+  category          String   @default("Straight")
+  price             Float    @default(0)
+  availability      String   @default("In Stock")
+  stockQty          Int      @default(0) @map("stock_qty")
+  lowStockThreshold Int      @default(2) @map("low_stock_threshold")
+  laceType          String   @default("Closure") @map("lace_type")
+  density           String   @default("180%")
+  capSize           String   @default("Medium") @map("cap_size")
+  colorsJson        String   @default("[]") @map("colors_json")
+  lengthsJson       String   @default("[]") @map("lengths_json")
+  mediaJson         String   @default("[]") @map("media_json")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@map("products")
+}
+
+model Order {
+  id               Int      @id @default(autoincrement())
+  orderId          String   @unique @map("order_id")
+  customerName     String   @map("customer_name")
+  phoneNumber      String   @map("phone_number")
+  deliveryType     String   @map("delivery_type")
+  deliveryAddress  String?  @default("") @map("delivery_address")
+  notes            String?  @default("")
+  paymentProofPath String?  @default("") @map("payment_proof_path")
+  subtotal         Float    @default(0)
+  status           String   @default("New")
+  itemsJson        String   @map("items_json")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@map("orders")
+}

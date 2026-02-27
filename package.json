@@ -1,0 +1,39 @@
+{
+  "name": "mj-hair-empire-v1",
+  "version": "1.0.0",
+  "description": "Mobile-first wig e-commerce website for MJ Hair Empire (V1)",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "start:render": "npm run prisma:migrate:deploy && npm start",
+    "build": "npm run prisma:generate",
+    "seed": "node scripts/seed.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:sqlite-to-postgres": "node scripts/migrate-sqlite-to-postgres.js"
+  },
+  "keywords": [
+    "wigs",
+    "ecommerce",
+    "express",
+    "sqlite"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "@supabase/supabase-js": "^2.49.8",
+    "better-sqlite3": "^11.8.1",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.6.0"
+  }
+}

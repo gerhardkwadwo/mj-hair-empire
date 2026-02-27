@@ -1,0 +1,108 @@
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Shop</p>
+        <h1>Luxury Wig Collection</h1>
+      </div>
+      <p class="muted"><%= result.total %> product(s) found</p>
+    </div>
+
+    <div class="shop-layout">
+      <aside class="filters card">
+        <form method="get" action="/shop">
+          <h2>Filters</h2>
+
+          <label>Category
+            <select name="category">
+              <option value="">All</option>
+              <% ['Straight','Body Wave','Curly','Bob','Frontal','Closure'].forEach((opt) => { %>
+                <option value="<%= opt %>" <%= filters.category === opt ? 'selected' : '' %>><%= opt %></option>
+              <% }) %>
+            </select>
+          </label>
+
+          <label>Availability
+            <select name="availability">
+              <option value="">All</option>
+              <% ['In Stock','Low Stock','Sold Out'].forEach((opt) => { %>
+                <option value="<%= opt %>" <%= filters.availability === opt ? 'selected' : '' %>><%= opt %></option>
+              <% }) %>
+            </select>
+          </label>
+
+          <label>Color
+            <input type="text" name="color" placeholder="e.g. Natural Black" value="<%= filters.color || '' %>" />
+          </label>
+
+          <label>Length
+            <input type="text" name="length" placeholder='e.g. 22' value="<%= filters.length || '' %>" />
+          </label>
+
+          <label>Min Price (GHS)
+            <input type="number" min="0" step="1" name="minPrice" value="<%= filters.minPrice || '' %>" />
+          </label>
+
+          <label>Max Price (GHS)
+            <input type="number" min="0" step="1" name="maxPrice" value="<%= filters.maxPrice || '' %>" />
+          </label>
+
+          <label>Lace Type
+            <select name="laceType">
+              <option value="">All</option>
+              <% ['Frontal','Closure'].forEach((opt) => { %>
+                <option value="<%= opt %>" <%= filters.laceType === opt ? 'selected' : '' %>><%= opt %></option>
+              <% }) %>
+            </select>
+          </label>
+
+          <div class="filter-actions">
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+            <a href="/shop" class="btn btn-ghost">Reset</a>
+          </div>
+        </form>
+      </aside>
+
+      <div>
+        <div class="product-grid">
+          <% result.items.forEach((product) => { const img = product.media.find((m) => m.type === 'image'); %>
+            <article class="product-card">
+              <a href="/product/<%= product.slug %>">
+                <img src="<%= img ? img.path : '/images/product-placeholder-1.svg' %>" alt="<%= img?.alt || product.name %>" loading="lazy" />
+                <div class="product-card__body">
+                  <p class="product-card__category"><%= product.category %></p>
+                  <h3><%= product.name %></h3>
+                  <p class="muted"><%= product.lace_type %> • <%= product.density %></p>
+                  <div class="product-card__row">
+                    <span><%= formatCurrency(product.price) %></span>
+                    <span class="badge <%= product.availability.toLowerCase().replace(/\s+/g, '-') %>"><%= product.availability %></span>
+                  </div>
+                </div>
+              </a>
+            </article>
+          <% }) %>
+        </div>
+
+        <% if (!result.items.length) { %>
+          <div class="empty-state card">
+            <h3>No products match your filters</h3>
+            <p>Try adjusting availability, price range, or lace type.</p>
+            <a class="btn btn-primary" href="/shop">Clear Filters</a>
+          </div>
+        <% } %>
+
+        <% if (result.totalPages > 1) { %>
+          <nav class="pagination" aria-label="Shop Pagination">
+            <% for (let p = 1; p <= result.totalPages; p += 1) {
+              const params = new URLSearchParams();
+              Object.entries(filters).forEach(([k,v]) => { if (v) params.set(k, v); });
+              params.set('page', p);
+            %>
+              <a href="/shop?<%= params.toString() %>" class="<%= p === result.page ? 'is-current' : '' %>"><%= p %></a>
+            <% } %>
+          </nav>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
